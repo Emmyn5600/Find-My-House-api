@@ -9,7 +9,7 @@ default: &default
   encoding: unicode
   database: findhouse
   pool: 5
-  username: postgres
+  username: emmyn5600
   password: password
 
 development:
