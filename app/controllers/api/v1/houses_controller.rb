@@ -7,12 +7,16 @@ module Api
         end
 
         def show 
-            house = House.find(params[:id]);
+            house = House.find_by(id:params[:id]);
+            if house
             render json: {status: 'SUCCESS', message:'Loaded House', data:house}, status: :ok
+            else 
+            render json: {status: 'ERROR', message:'Houses with that id does not exist', data:house}, status: 404
+            end  
         end
 
         def create
-          user ||= user.find(house_params[:user_id])
+          user ||= User.find_by(id:house_params[:user_id])
           if user             
            house = user.houses.build(house_params)
            if house.save
