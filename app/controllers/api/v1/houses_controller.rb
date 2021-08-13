@@ -38,7 +38,15 @@ module Api
            render json: {status: 'ERROR', message:'Houses with that id does not exist', data:house}, status: 404
         end
       end
-
+        
+        def update 
+          house = House.find_by(id:params[:id])
+          if house.update(house_params)
+          render json: {status: 'SUCCESS', message:'Houses updated successfully', data:house}, status: :ok
+          else
+            render json: {status: 'ERROR', message:'Houses not updated succesffully', data:house.errors}, status: 404
+          end
+        end
         private 
 
         def house_params
