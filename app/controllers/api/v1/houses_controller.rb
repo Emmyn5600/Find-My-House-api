@@ -29,6 +29,16 @@ module Api
           end
         end
 
+        def destroy 
+           house = House.find_by(id:params[:id])
+           if house
+           house.destroy
+           render json: {status: 'SUCCESS', message:'Houses Deleted successfully', data:house}, status: :ok
+           else 
+           render json: {status: 'ERROR', message:'Houses with that id does not exist', data:house}, status: 404
+        end
+      end
+
         private 
 
         def house_params
