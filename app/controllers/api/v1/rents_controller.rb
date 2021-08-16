@@ -3,7 +3,7 @@ module Api
     class RentsController < ApplicationController
       before_action :authorize_request
       before_action :check_rent_data, only: [:create]
-      # before_action :authorize_admin, only: :index
+      before_action :authorize_admin, only: :index
 
       def index
         @rent = Rent.all.order(Arel.sql('random()'))
