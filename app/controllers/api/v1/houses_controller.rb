@@ -11,7 +11,7 @@ module Api
         if house
           render json: { status: 'SUCCESS', message: 'Loaded House', data: house }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Houses with that id does not exist', data: house }, status: 404
+           render json: { message: "House not found with ID #{params[:id]}" }, status: 404
         end
       end
 
@@ -36,16 +36,23 @@ module Api
           house.destroy
           render json: { status: 'SUCCESS', message: 'Houses Deleted successfully', data: house }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Houses with that id does not exist', data: house }, status: 404
+          render json: { message: "House not found with ID #{params[:id]} doesn't exist" }, status: 404
         end
       end
-
+      
       def update
         house = House.find_by(id: params[:id])
-        if house.update(house_params)
-          render json: { status: 'SUCCESS', message: 'Houses updated successfully', data: house }, status: :ok
+        if house.nil?
+          render json: { message: "house not found with ID #{params[:id]}" }, status: 404
         else
-          render json: { status: 'ERROR', message: 'Houses not updated succesffully', data: house.errors }, status: 404
+          user ||= User.find_by(id: house_params[:user_id])
+          if user.nil?
+            render json: { message: "User not found with ID #{house_params[:author_id]}" }, status: 404
+          elsif house.update(house_params)
+            render json: house, status: 200
+          else
+            render json: { message: house.errors.full_messages[0] }, status: 400
+          end
         end
       end
 
