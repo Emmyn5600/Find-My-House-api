@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  attr_reader :current_user
+
   def not_found
     render json: { error: 'not_found' }
   end
@@ -14,5 +16,10 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  def authorize_admin
+    @admin = AuthorizeAdmin.new(current_user).call
+    render json: { message: 'You are not Authorized to perform this action' }, status: 401 unless @admin
   end
 end
