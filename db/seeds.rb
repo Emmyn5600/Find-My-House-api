@@ -1,5 +1,9 @@
 user = User.create(
-    name: 'emmy'
+    name: 'emmyn5600',
+    email: 'emmy66418@gmail.com',
+    password: 'password',
+    password_confirmation:'password',
+    is_admin: true
 )
 
 4.times do
