@@ -11,7 +11,7 @@ module Api
         if house
           render json: { status: 'SUCCESS', message: 'Loaded House', data: house }, status: :ok
         else
-           render json: { message: "House not found with ID #{params[:id]}" }, status: 404
+          render json: { message: "House not found with ID #{params[:id]}" }, status: 404
         end
       end
 
@@ -39,7 +39,7 @@ module Api
           render json: { message: "House not found with ID #{params[:id]} doesn't exist" }, status: 404
         end
       end
-      
+
       def update
         house = House.find_by(id: params[:id])
         if house.nil?
