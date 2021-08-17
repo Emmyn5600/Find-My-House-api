@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_create :set_user_not_admin
+  #before_create :set_user_not_admin
 
   has_secure_password
   validates :email, presence: true, uniqueness: true

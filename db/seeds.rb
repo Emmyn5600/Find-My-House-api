@@ -1,4 +1,4 @@
-user = User.create(
+User.create(
     name: 'emmyn5600',
     email: 'emmy66418@gmail.com',
     password: 'password',
