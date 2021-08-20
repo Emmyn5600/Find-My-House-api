@@ -4,4 +4,5 @@ class House < ApplicationRecord
   validates :price, presence: true
   validates :image, presence: true
   belongs_to :user
+  has_many :rents
 end
