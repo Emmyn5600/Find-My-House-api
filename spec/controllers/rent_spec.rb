@@ -1,15 +1,12 @@
-# require 'rails_helper'
+require 'rails_helper'
 
-# describe 'the rent feature', type: :feature do
-#   it 'should not add to rents a house if no user_id is passed' do
-#     user = User.new(name: 'emmy', email: 'emmy@gmail.com', password: 'pass',
-#                     password_confirmation: 'pass')
-#     house = House.create(name: 'apartment', price: '$1000', description: 'This is a good house',
-#                            user_id: user.id)
-#     rent = Rent.new(house_id: house.id)
-#     expect(rent.save).to be(false)
-#  end
-
-
- 
-# end
+describe 'the rent feature', type: :feature do
+    it 'should add to rents a house if user_id is passed' do
+        user = User.new(name: 'emmy', email: 'emmy@gmail.com', password: 'password',
+            password_confirmation: 'password')
+      house = House.create(name: 'house1', price: '$400', description: 'this is the description of the house',
+                             user_id: user.id)
+      rent = Rent.new(house_id: house.id, user_id: user.id)
+      expect(rent.save).to be(true)
+    end
+end
