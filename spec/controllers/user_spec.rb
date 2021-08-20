@@ -16,4 +16,11 @@ describe 'the sign up process', type: :feature do
                     password_confirmation: 'password')
     expect(user.save).to be(false)
   end
+
+  it 'should save user with all fields' do
+    user = User.new(name: 'emmy', email: 'emmy@gmail.com', password: 'password',
+                    password_confirmation: 'password')
+    user.save
+    expect(user.name).to eq('emmy')
+  end
 end
