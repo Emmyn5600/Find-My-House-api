@@ -6,5 +6,8 @@ describe 'the sign up process', type: :feature do
     expect(user.save).to be(false)
  end
 
- 
+ it 'should not save user without the password' do
+    user = User.new(name: 'emmy', email: 'emmy@gmail.com')
+    expect(user.save).to be(false)
+  end
 end
