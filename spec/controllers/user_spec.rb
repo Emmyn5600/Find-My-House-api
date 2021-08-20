@@ -23,4 +23,10 @@ describe 'the sign up process', type: :feature do
     user.save
     expect(user.name).to eq('emmy')
   end
+
+  it 'should not save the user with a password less than 6 characters' do
+    user = User.new(name: 'John', email: 'emmy@gmail.com', password: 'pass',
+                    password_confirmation: 'pass')
+    expect(user.save).to be(false)
+  end
 end
