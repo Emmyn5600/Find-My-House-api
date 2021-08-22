@@ -24,7 +24,7 @@ describe 'the rent feature', type: :feature do
                     password_confirmation: 'password')
     house = House.create(name: 'house1', price: '$400', description: 'this is the description of the house',
                          user_id: user.id)
-    rent = Rent.new(user_id: user.id, house_id: 1)
+    rent = Rent.new(user_id: user.id, house_id: house.id)
     expect(rent.save).to be(true)
   end
 end

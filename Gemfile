@@ -34,7 +34,6 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 # Add jwt
 gem 'jwt'
 # gem for testing
-gem 'capybara', '>= 3.26'
 gem 'rspec-rails', '~> 5.0.0'
 gem 'shoulda-matchers', '~> 4.0'
 # Use Redis adapter to run Action Cable in production
