@@ -1,9 +1,8 @@
 module Api
   module V1
     class HousesController < ApplicationController
-      before_action :authorize_request, except: :create
-      before_action :find_user, except: %i[create index]
-      before_action :authorize_admin, only: [:index]
+      before_action :authorize_request, except: :index
+      before_action :authorize_admin, only: %i[create update destroy]
       def index
         houses = House.all.order(Arel.sql('random()'))
         render json: { status: 'SUCCESS', message: 'Loaded Houses', data: houses }, status: :ok

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :rents
     end
   end
-  resources :users, param: :_username
+  resources :users, param: :id
   post '/auth/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
 end

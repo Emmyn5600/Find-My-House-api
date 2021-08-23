@@ -2,8 +2,6 @@ module Api
   module V1
     class RentsController < ApplicationController
       before_action :authorize_request
-      before_action :check_rent_data, only: [:create]
-      before_action :authorize_admin, only: :index
 
       def index
         @rent = Rent.all.order(Arel.sql('random()'))
@@ -25,10 +23,10 @@ module Api
         if user.nil?
           render json: { message: "User not found with ID #{rent_params[:user_id]}" }, status: 404
         else
-          rent = rent.find_by(user_id: user.id, house_id: rent_params[:house_id])
+          rent = Rent.find_by(user_id: user.id, house_id: rent_params[:house_id])
           if rent.nil?
-            rent = user.rent.build(rent_params)
-            house = house.find_by(id: rent_params[:house_id])
+            rent = user.rents.build(rent_params)
+            house = House.find_by(id: rent_params[:house_id])
             if house.nil?
               render json: { message: "house not found with ID #{rent_params[:house_id]}" },
                      status: 404
@@ -49,7 +47,7 @@ module Api
           render json: { message: "rent not found with ID #{params[:id]}" }, status: 404
         else
           rent.destroy
-          render json: rent, status: 200
+          render json: { message: "rent with ID #{params[:id]} has been deleted", data: rent }, status: 200
         end
       end
 
@@ -57,13 +55,6 @@ module Api
 
       def rent_params
         params.require(:rent).permit(:house_id, :user_id)
-      end
-
-      def check_rent_data
-        return unless params[:house_id].nil? || params[:user_id].nil?
-
-        render json: { message: 'No rent data provided' },
-               status: 422
       end
     end
   end
