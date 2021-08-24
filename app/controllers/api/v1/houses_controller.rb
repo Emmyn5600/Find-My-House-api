@@ -28,7 +28,7 @@ module Api
                    status: :unprocessable_entry
           end
         else
-          render json: { status: 404, message: 'User not found' }, status: 404
+          render json: { status: 404, message: 'User not found ++++' }, status: 404
         end
       end
 
@@ -61,7 +61,7 @@ module Api
       private
 
       def house_params
-        params.permit(:name, :description, :price, :image, :user_id)
+        params.require(:house).permit(:name, :description, :price, :image, :user_id)
       end
     end
   end
