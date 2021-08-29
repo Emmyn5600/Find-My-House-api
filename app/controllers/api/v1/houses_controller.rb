@@ -4,7 +4,7 @@ module Api
       before_action :authorize_request, except: :index
       before_action :authorize_admin, only: %i[create update destroy]
       def index
-        houses = House.all.order(Arel.sql('random()'))
+        houses = House.all.order('created_at DESC')
         render json: { status: 'SUCCESS', message: 'Loaded Houses', data: houses }, status: :ok
       end
 

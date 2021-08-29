@@ -4,7 +4,7 @@ module Api
       before_action :authorize_request
 
       def index
-        @rent = Rent.all.order(Arel.sql('random()'))
+        @rent = Rent.all.order('created_at DESC')
         render json: @rent, status: 200
       end
 
@@ -13,7 +13,7 @@ module Api
         if user.nil?
           render json: { message: "User not found with ID #{params[:id]} doesn't exist" }, status: 404
         else
-          rent = user.rents.order('created_at DESC')
+          rent = user.rents.order('created_at DESC').map {|rent| {id: rent.id, user_id: rent.user_id, house: rent.house}}
           render json: rent, status: 200
         end
       end
