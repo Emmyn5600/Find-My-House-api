@@ -13,7 +13,9 @@ module Api
         if user.nil?
           render json: { message: "User not found with ID #{params[:id]} doesn't exist" }, status: 404
         else
-          rent = user.rents.order('created_at DESC').map {|rent| {id: rent.id, user_id: rent.user_id, house: rent.house}}
+          rent = user.rents.order('created_at DESC').map do |rent|
+            { id: rent.id, user_id: rent.user_id, house: rent.house }
+          end
           render json: rent, status: 200
         end
       end
@@ -31,7 +33,7 @@ module Api
               render json: { message: "house not found with ID #{rent_params[:house_id]}" },
                      status: 404
             elsif rent.save
-              render json: rent, status: 200
+              render json: { id: rent.id, user_id: rent.user_id, house: rent.house }, status: 200
             else
               render json: { message: rent.errors.full_messages[0] }, status: 400
             end
@@ -47,7 +49,9 @@ module Api
           render json: { message: "rent not found with ID #{params[:id]}" }, status: 404
         else
           rent.destroy
-          render json: { message: "rent with ID #{params[:id]} has been deleted", data: rent }, status: 200
+          render json: { message: "rent with ID #{params[:id]} has been deleted",
+                         data: { id: rent.id, user_id: rent.user_id, house: rent.house } },
+                 status: 200
         end
       end
 
