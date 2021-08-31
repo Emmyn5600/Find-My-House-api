@@ -98,4 +98,4 @@ Give a ⭐️ if you like this project!
 
 - Microverse
 
-Copyright (c) 2021 [Emmanuel NSABIMANA]emmanuelnsabimana.netlify.app)
+Copyright (c) 2021 [Emmanuel NSABIMANA](emmanuelnsabimana.netlify.app)
