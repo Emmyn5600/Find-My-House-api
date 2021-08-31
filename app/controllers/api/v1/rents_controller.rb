@@ -13,8 +13,8 @@ module Api
         if user.nil?
           render json: { message: "User not found with ID #{params[:id]} doesn't exist" }, status: 404
         else
-          rent = user.rents.order('created_at DESC').map do |rent|
-            { id: rent.id, user_id: rent.user_id, house: rent.house }
+          rent = user.rents.order('created_at DESC').map do |r|
+            { id: r.id, user_id: r.user_id, house: r.house }
           end
           render json: rent, status: 200
         end
